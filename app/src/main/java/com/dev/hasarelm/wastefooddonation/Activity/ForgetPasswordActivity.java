@@ -72,7 +72,6 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
             result = 0;
         }
         return result;
-
     }
 
     @Override
@@ -104,12 +103,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                                 @Override
                                                 public void onClick(SweetAlertDialog sDialog) {
-                                                    sDialog
-                                                            .setTitleText("Deleted!")
-                                                            .setContentText("Your imaginary file has been deleted!")
-                                                            .setConfirmText("OK")
-                                                            .setConfirmClickListener(null)
-                                                            .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                                    sDialog.dismiss();
                                                 }
                                             })
                                             .show();
