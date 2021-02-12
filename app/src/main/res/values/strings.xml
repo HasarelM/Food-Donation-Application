@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">WasteFoodDonation</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Meal Shareing!</string>
+    <string name="slide_1_desc">Share Meals is dedicated to ending hunger and social isolation!</string>
+
+    <string name="slide_2_title">Drop a Message!</string>
+    <string name="slide_2_desc">If you have additional foods. Drop a message!</string>
+
+    <string name="slide_3_title">Easy PickUp</string>
+    <string name="slide_3_desc">We are comming your place!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">All you need to Donate order your Waste foods!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <!--navigation drawer item labels-->
+    <string name="nav_item_1">Home</string>
+    <string name="nav_item_2">Donation History</string>
+    <string name="nav_item_sync">Your Rate</string>
+    <string name="nav_item_notification">Notification</string>
+    <string name="nav_item_about">About us</string>
+    <string name="nav_item_logout">Logout</string>
+
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_1</item>
+        <item>@string/nav_item_2</item>
+        <item>@string/nav_item_sync</item>
+        <item>@string/nav_item_notification</item>
+        <item>@string/nav_item_about</item>
+        <item>@string/nav_item_logout</item>
+    </string-array>
+
+    <!-- drawer open-close -->
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="home_activity_title">Home</string>
+    <string name="Donation_activity_title">Donation History</string>
+    <string name="rate_activity_title">Donation Rate</string>
+    <string name="notification_activity_title">Notification</string>
+    <string name="about_activity_title">About</string>
+    <string name="forget_password_activity_title">Forget Password</string>
+    <string name="register_activity_title">Register Here</string>
+
+
+    <!--Rider-->
+    <string name="rider_home_activity_title">Home</string>
+    <string name="rider_register_activity_title">Register Here</string>
+
+
+</resources>

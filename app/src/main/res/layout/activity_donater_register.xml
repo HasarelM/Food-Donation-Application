@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Donater.DonaterRegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+
+        <TextView
+            android:id="@+id/txt_back_arrow_dont"
+            android:layout_width="90dp"
+            android:layout_height="50dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/newkkk"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="First name "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_fName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="12dp"
+                        android:drawableLeft="@drawable/ic_baseline_account"
+                        android:hint=" Enter First name"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Last name "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_lName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="12dp"
+                        android:drawableLeft="@drawable/ic_baseline_account"
+                        android:hint=" Enter Last name"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Address "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_baseline_house"
+                        android:hint=" Enter Address"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Street "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_street"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="12dp"
+                        android:drawableLeft="@drawable/ic_baseline_alt_route_24"
+                        android:hint=" Enter Street"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="City "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="12dp"
+                        android:drawableLeft="@drawable/ic_baseline_approval_24"
+                        android:hint=" Enter City"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Email "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_baseline_email_24"
+                        android:hint=" Enter Email"
+                        android:textSize="12dp"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Mobile no "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="12dp"
+                        android:maxLength="10"
+                        android:drawableLeft="@drawable/ic_baseline_smartphone_24"
+                        android:hint=" Enter Mobile No"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Password "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_baseline_lock"
+                        android:hint=" Enter Password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Confirm password "
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
+
+                    <EditText
+                        android:id="@+id/activity_register_et_confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="12dp"
+                        android:inputType="textPassword"
+                        android:drawableLeft="@drawable/ic_baseline_lock"
+                        android:hint=" Enter Confirm Password"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp" />
+                </androidx.cardview.widget.CardView>
+
+
+                <Button
+                    android:id="@+id/activity_register_btn_register"
+                    android:textSize="15dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="60dp"
+                    android:layout_marginLeft="60dp"
+                    android:textAllCaps="false"
+                    android:text="Register"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="30dp"
+                    android:textColor="@color/white"
+                    android:elevation="100dp"
+                    android:background="@drawable/bg_background_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+    </RelativeLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/fragment_navigation_drawer"
+        layout="@layout/drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
