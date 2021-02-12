@@ -6,17 +6,17 @@
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
 
-    <string name="slide_1_title">Meal Shareing!</string>
-    <string name="slide_1_desc">Share Meals is dedicated to ending hunger and social isolation!</string>
+    <string name="slide_1_title">Request!</string>
+    <string name="slide_1_desc">I have a some food to donate. Could you please pick it up!</string>
 
-    <string name="slide_2_title">Drop a Message!</string>
-    <string name="slide_2_desc">If you have additional foods. Drop a message!</string>
+    <string name="slide_2_title">Pick Up!</string>
+    <string name="slide_2_desc">I have arrived to pick your Donation!</string>
 
-    <string name="slide_3_title">Easy PickUp</string>
-    <string name="slide_3_desc">We are comming your place!</string>
+    <string name="slide_3_title">Delivery</string>
+    <string name="slide_3_desc">Successfully delivery your Donation!</string>
 
-    <string name="slide_4_title">World Travel</string>
-    <string name="slide_4_desc">All you need to Donate order your Waste foods!</string>
+    <string name="slide_4_title">Happy Ending!</string>
+    <string name="slide_4_desc">Be proud! You become a hunger fighter by donation food to the ones who are in hunger. Thank you!</string>
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
