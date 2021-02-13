@@ -51,6 +51,7 @@
                     android:textColor="@color/col_red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
