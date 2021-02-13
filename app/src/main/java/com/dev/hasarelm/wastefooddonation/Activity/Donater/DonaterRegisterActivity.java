@@ -18,6 +18,7 @@ import com.dev.hasarelm.wastefooddonation.Activity.Rider.RiderRegisterActivity;
 import com.dev.hasarelm.wastefooddonation.Common.BaseActivity;
 import com.dev.hasarelm.wastefooddonation.Common.EndPoints;
 import com.dev.hasarelm.wastefooddonation.Common.RetrofitClient;
+import com.dev.hasarelm.wastefooddonation.Common.SharedPref;
 import com.dev.hasarelm.wastefooddonation.Model.DonaterRegisterModel;
 import com.dev.hasarelm.wastefooddonation.Model.RiderRegisterModel;
 import com.dev.hasarelm.wastefooddonation.Model.login;
@@ -156,12 +157,24 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
                     @Override
                     public void onResponse(Call<DonaterRegisterModel> call, Response<DonaterRegisterModel> response) {
 
+                        String userName = "";
+                        String ID = "";
                         if (response.code() == 200) {
                             myPd_ring.dismiss();
-                            Toast.makeText(DonaterRegisterActivity.this, "donater "+message,Toast.LENGTH_LONG).show();
+                            Toast.makeText(DonaterRegisterActivity.this, "doneter "+message,Toast.LENGTH_LONG).show();
                             message = response.body().getMessage();
                             mDonaterRegisterModel = response.body();
+                            mRegister = mDonaterRegisterModel.getRegister();
                             mRegister = response.body().getRegister();
+
+                            for (register rs : mRegister){
+
+                                userName = rs.getEmail().toString().trim();
+                                ID = rs.getId().toString().trim();
+                            }
+
+                            SharedPref.setLocalSharedPreference(DonaterRegisterActivity.this,"D_LOGIN_USER_NAME",userName);
+                            SharedPref.setLocalSharedPreference(DonaterRegisterActivity.this,"D_LOGIN_USER_ID",ID);
                             Intent intent = new Intent(DonaterRegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }

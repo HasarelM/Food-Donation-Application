@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -32,6 +33,7 @@ public class BaseActivity extends AppCompatActivity implements DrawerFragment.Fr
     private Toolbar mToolbar;
     private DrawerFragment mDrawerFragment;
     private DrawerLayout mDrawerLayout;
+    public static SharedPreferences localSP;
 
     public BaseActivity() {
     }

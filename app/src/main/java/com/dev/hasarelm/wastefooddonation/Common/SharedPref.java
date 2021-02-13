@@ -23,11 +23,18 @@ public class SharedPref {
 
     public static final String USER_TASK_LIST_START_DATE = "";
     public static final String USER_TASK_LIST_END_DATE = "";
-
+    public static String SETTINGS = "SETTINGS";
     public static final String DEFAULT_VALUE_FOR_STRING = "";
 
     public static SharedPreferences getPref(Context ctx) {
         return ctx.getSharedPreferences(SharedPref.FILE_KEY, Context.MODE_PRIVATE);
+    }
+
+    public static void setLocalSharedPreference(final Context con, String localSPKey, String localSPValue) {
+        SharedPreferences localSP = con.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE+ Context.MODE_PRIVATE);
+        SharedPreferences.Editor localBackupEditor = localSP.edit();
+        localBackupEditor.putString(localSPKey, localSPValue);
+        localBackupEditor.commit();
     }
 
     public static void saveString(Context act, String key, String value) {

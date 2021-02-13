@@ -12,11 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dev.hasarelm.wastefooddonation.Activity.Donater.DonaterRegisterActivity;
 import com.dev.hasarelm.wastefooddonation.Activity.LoginActivity;
 import com.dev.hasarelm.wastefooddonation.Common.BaseActivity;
 import com.dev.hasarelm.wastefooddonation.Common.CommonFunction;
 import com.dev.hasarelm.wastefooddonation.Common.EndPoints;
 import com.dev.hasarelm.wastefooddonation.Common.RetrofitClient;
+import com.dev.hasarelm.wastefooddonation.Common.SharedPref;
 import com.dev.hasarelm.wastefooddonation.Model.DistrictsModel;
 import com.dev.hasarelm.wastefooddonation.Model.RiderRegisterModel;
 import com.dev.hasarelm.wastefooddonation.Model.VehicleTypeModel;
@@ -250,12 +252,24 @@ public class RiderRegisterActivity extends BaseActivity implements View.OnClickL
                 @Override
                 public void onResponse(Call<RiderRegisterModel> call, Response<RiderRegisterModel> response) {
 
+                    String userName = "";
+                    String ID = "";
+
                     if (response.code() == 200) {
                         myPd_ring.dismiss();
                         Toast.makeText(RiderRegisterActivity.this, "Rider "+message,Toast.LENGTH_LONG).show();
                         message = response.body().getMessage();
                         mRegisterModel = response.body();
                         mRegister = response.body().getRegister();
+
+                        for (register rs : mRegister){
+
+                            userName = rs.getEmail().toString().trim();
+                            ID = rs.getId().toString().trim();
+                        }
+                        SharedPref.setLocalSharedPreference(RiderRegisterActivity.this,"R_LOGIN_USER_NAME",userName);
+                        SharedPref.setLocalSharedPreference(RiderRegisterActivity.this,"R_LOGIN_USER_ID",ID);
+
                         Intent intent = new Intent(RiderRegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
