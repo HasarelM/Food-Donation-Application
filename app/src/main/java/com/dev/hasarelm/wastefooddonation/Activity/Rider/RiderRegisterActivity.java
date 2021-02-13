@@ -228,9 +228,7 @@ public class RiderRegisterActivity extends BaseActivity implements View.OnClickL
             obj.setPassword_confirmation(c_password+"");
             obj.setType("1");
             objLst.add(obj);
-
         }
-
         return objLst;
     }
 
@@ -306,13 +304,13 @@ public class RiderRegisterActivity extends BaseActivity implements View.OnClickL
             mEtVehicleNo.requestFocus();
             mEtVehicleNo.setError("Vehicle no cannot be blank");
             return false;
-        } else if (password.length() == 0) {
+        } else if (password.length() < 7) {
             mEtPassword.requestFocus();
-            mEtPassword.setError("Password cannot be blank");
+            mEtPassword.setError("Password should be more than 7");
             return false;
-        } else if (c_password.length() == 0) {
+        } else if (c_password.length() <7) {
             mEtCpassword.requestFocus();
-            mEtCpassword.setError("C_Password cannot be blank");
+            mEtCpassword.setError("C_Password should be more than 7");
             return false;
         } else if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(c_password)) {
             if (password.equals(c_password)) {

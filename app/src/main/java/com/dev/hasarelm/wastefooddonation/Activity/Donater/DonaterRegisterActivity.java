@@ -231,13 +231,13 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
             mEtEmail.requestFocus();
             mEtEmail.setError("invalid email address");
             return false;
-        } else if (password.length() == 0) {
+        } else if (password.length() <7) {
             mEtPassword.requestFocus();
-            mEtPassword.setError("Password cannot be blank");
+            mEtPassword.setError("Password should be more than 7");
             return false;
-        } else if (c_password.length() == 0) {
+        } else if (c_password.length() <7) {
             mEtCpassword.requestFocus();
-            mEtCpassword.setError("C_Password cannot be blank");
+            mEtCpassword.setError("C_Password should be more than 7");
             return false;
         } else if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(c_password)) {
             if (password.equals(c_password)) {
