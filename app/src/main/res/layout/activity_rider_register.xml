@@ -25,7 +25,6 @@
                 android:layout_height="50dp"/>
 
             <LinearLayout
-                android:background="@drawable/newkkk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/toolbar"
@@ -41,7 +40,7 @@
 
                     <TextView
                         android:text="First name "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -50,29 +49,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
+
+                <EditText
+                    android:id="@+id/activity_rider_register_et_fName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/card_edge"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
-
-                    <EditText
-                        android:id="@+id/activity_rider_register_et_fName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:textSize="12dp"
-                        android:drawableLeft="@drawable/ic_baseline_account"
-                        android:hint=" Enter First name"
-                        android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                    android:textSize="12dp"
+                    android:drawableLeft="@drawable/ic_baseline_account"
+                    android:hint=" Enter First name"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp" />
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -84,7 +74,7 @@
 
                     <TextView
                         android:text="Last name "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -93,30 +83,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
+
+                <EditText
+                    android:id="@+id/activity_rider_register_et_lName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/card_edge"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
                     android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
-
-                    <EditText
-                        android:id="@+id/activity_rider_register_et_lName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:textSize="12dp"
-                        android:drawableLeft="@drawable/ic_baseline_account"
-                        android:hint=" Enter Last name"
-                        android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                    android:textSize="12dp"
+                    android:drawableLeft="@drawable/ic_baseline_account"
+                    android:hint=" Enter Last name"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp" />
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -128,7 +108,7 @@
 
                     <TextView
                         android:text="Vehicle Type "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -137,30 +117,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
 
-                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                        android:id="@+id/activity_rider_register_sp_vehicle_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@null"
-                        android:textSize="12dp"
-                        android:drawableLeft="@drawable/ic_baseline_alt_route_24"
-                        android:hint=" Enter Vehicle type"
-                        android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/activity_rider_register_sp_vehicle_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/card_edge"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="12dp"
+                    android:drawableLeft="@drawable/ic_baseline_alt_route_24"
+                    android:hint=" Enter Vehicle type"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"/>
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -172,7 +142,7 @@
 
                     <TextView
                         android:text="District "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -181,29 +151,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
 
                     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/activity_rider_register_sp_district"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@null"
+                        android:background="@drawable/card_edge"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:textSize="12dp"
                         android:drawableLeft="@drawable/ic_baseline_approval_24"
                         android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp">
+                    </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -215,7 +176,7 @@
 
                     <TextView
                         android:text="Vehicle No "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -224,30 +185,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
 
                     <EditText
                         android:id="@+id/activity_rider_register_et_vehicle_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
+                        android:background="@drawable/card_edge"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:drawableLeft="@drawable/ic_baseline_local_shipping_24"
                         android:hint=" Enter Vehicle no"
                         android:textSize="12dp"
                         android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"/>
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -259,7 +210,7 @@
 
                     <TextView
                         android:text="Mobile no "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -268,32 +219,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
 
                     <EditText
                         android:id="@+id/activity_rider_register_et_mobile_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
+                        android:background="@drawable/card_edge"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:textSize="12dp"
                         android:maxLength="10"
                         android:inputType="number"
                         android:drawableLeft="@drawable/ic_baseline_smartphone_24"
                         android:hint=" Enter Mobile No"
                         android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp" />
+
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -305,7 +247,7 @@
 
                     <TextView
                         android:text="Email "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -314,30 +256,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
 
                     <EditText
                         android:id="@+id/activity_rider_register_et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
+                        android:background="@drawable/card_edge"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:textSize="12dp"
                         android:drawableLeft="@drawable/ic_baseline_email_24"
                         android:hint=" Enter Email"
                         android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp" />
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -349,7 +281,7 @@
 
                     <TextView
                         android:text="Password "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -358,17 +290,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
 
                     <EditText
                         android:id="@+id/activity_rider_register_et_password"
@@ -376,13 +297,14 @@
                         android:layout_height="wrap_content"
                         android:textSize="12dp"
                         android:inputType="textPassword"
-                        android:background="@null"
+                        android:background="@drawable/card_edge"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:drawableLeft="@drawable/ic_baseline_lock"
                         android:hint=" Enter Password"
                         android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp" />
 
                 <LinearLayout
                     android:layout_marginTop="5dp"
@@ -394,7 +316,7 @@
 
                     <TextView
                         android:text="Confirm password "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -403,31 +325,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="30dp"
-                    app:cardCornerRadius="3dp"
-                    app:cardElevation="3dp"
-                    app:cardMaxElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true">
 
                     <EditText
                         android:id="@+id/activity_rider_register_et_confirm_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
+                        android:background="@drawable/card_edge"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:textSize="12dp"
                         android:inputType="textPassword"
                         android:drawableLeft="@drawable/ic_baseline_lock"
                         android:hint=" Enter Confirm Password"
                         android:paddingLeft="3dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp" />
-                </androidx.cardview.widget.CardView>
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp" />
 
                 <Button
                     android:id="@+id/activity_rider_register_btn_register"

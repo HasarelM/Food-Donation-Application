@@ -33,7 +33,6 @@ public class BaseActivity extends AppCompatActivity implements DrawerFragment.Fr
     private Toolbar mToolbar;
     private DrawerFragment mDrawerFragment;
     private DrawerLayout mDrawerLayout;
-    public static SharedPreferences localSP;
 
     public BaseActivity() {
     }
@@ -125,6 +124,7 @@ public class BaseActivity extends AppCompatActivity implements DrawerFragment.Fr
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismissWithAnimation();
+                                SharedPreferencesClass.ClearSharedPreference(BaseActivity.this,"deoneter_user_name");
                                 UserInfoManager.logout(innerActivity);
                                 startActivity(new Intent(getApplicationContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             }

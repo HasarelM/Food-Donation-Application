@@ -1,35 +1,36 @@
 package com.dev.hasarelm.wastefooddonation.Activity.Donater;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dev.hasarelm.wastefooddonation.Activity.ForgetPasswordActivity;
 import com.dev.hasarelm.wastefooddonation.Activity.LoginActivity;
 import com.dev.hasarelm.wastefooddonation.Activity.Rider.RiderRegisterActivity;
 import com.dev.hasarelm.wastefooddonation.Common.BaseActivity;
 import com.dev.hasarelm.wastefooddonation.Common.EndPoints;
 import com.dev.hasarelm.wastefooddonation.Common.RetrofitClient;
 import com.dev.hasarelm.wastefooddonation.Common.SharedPref;
+import com.dev.hasarelm.wastefooddonation.Model.DistrictsModel;
 import com.dev.hasarelm.wastefooddonation.Model.DonaterRegisterModel;
 import com.dev.hasarelm.wastefooddonation.Model.RiderRegisterModel;
-import com.dev.hasarelm.wastefooddonation.Model.login;
+import com.dev.hasarelm.wastefooddonation.Model.districts;
 import com.dev.hasarelm.wastefooddonation.Model.register;
 import com.dev.hasarelm.wastefooddonation.R;
 import com.google.gson.Gson;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -44,12 +45,15 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
     private EditText mEtFname,mEtLname,mEtAddress,mEtStreet,mEtCity,mEtEmail,mEtMobileNo,mEtPassword,mEtCpassword;
     private Button mBtnRegister;
     private TextView mTvBackArrow;
+    private SearchableSpinner mSpDistrict;
     private TextView tv;
 
     private String message;
     private ArrayList<register> mRegister;
     private DonaterRegisterModel mDonaterRegisterModel;
-
+    private List<String> mSelectDistrict = new ArrayList<String>();
+    private List<String> mSelectVehicleType = new ArrayList<String>();
+    private RiderRegisterModel mRegisterModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
         setToolbar(getResources().getString(R.string.register_activity_title), DonaterRegisterActivity.this);
 
         initView();
+        getDistricts();
     }
 
     private void initView() {
@@ -73,8 +78,49 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
         mEtCpassword = findViewById(R.id.activity_register_et_confirm_password);
         mBtnRegister = findViewById(R.id.activity_register_btn_register);
         mTvBackArrow = findViewById(R.id.txt_back_arrow_dont);
+        mSpDistrict = findViewById(R.id.activity_donater_register_sp_district);
         mTvBackArrow.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
+    }
+
+    private void getDistricts() {
+
+        final ProgressDialog myPd_ring = ProgressDialog.show(this, "Please wait", "", true);
+        try {
+            EndPoints endPoints = RetrofitClient.getLoginClient().create(EndPoints.class);
+            Call<DistrictsModel> call = endPoints.getDistrict(VLF_BASE_URL + "districts");
+            call.enqueue(new Callback<DistrictsModel>() {
+                @Override
+                public void onResponse(Call<DistrictsModel> call, Response<DistrictsModel> response) {
+                    if (response.code() == 200) {
+
+                        DistrictsModel districtsModel = response.body();
+                        ArrayList<districts> districtsArrayList = districtsModel.getDistricts();
+
+                        for (districts DS : districtsArrayList)//loda all district
+                        {
+                            String Description = DS.getName();
+                            mSelectDistrict.add(Description);
+                        }
+
+                        mSelectDistrict.add(0,"Select District");
+                        ArrayAdapter<String> dataAdapter_type = new ArrayAdapter<String>(DonaterRegisterActivity.this, android.R.layout.simple_spinner_item, mSelectDistrict);
+                        dataAdapter_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        mSpDistrict.setAdapter(dataAdapter_type);
+
+                        myPd_ring.dismiss();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DistrictsModel> call, Throwable t) {
+
+                    myPd_ring.dismiss();
+                }
+            });
+
+        } catch (Exception ff) {
+        }
     }
 
     @Override
@@ -117,6 +163,7 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
             String phone = mEtMobileNo.getText().toString();
             String c_password = mEtCpassword.getText().toString();
             String password = mEtCpassword.getText().toString();
+            String district_type = mSpDistrict.getSelectedItemPosition()+ "";
 
             obj.setName(name+"");
             obj.setLast_name(lName+"");
@@ -125,13 +172,12 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
             obj.setAdd_line_3(city+"");
             obj.setPhone(phone+"");
             obj.setEmail(email+"");
+            obj.setDistrict_id(district_type+"");
             obj.setPassword(password+"");
             obj.setPassword_confirmation(c_password+"");
             obj.setType("2");
             objLst.add(obj);
-
         }
-
         return objLst;
     }
 

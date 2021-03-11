@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.dev.hasarelm.wastefooddonation.Activity.Donater.AboutUsActivity;
 import com.dev.hasarelm.wastefooddonation.Activity.Donater.DonaterRegisterActivity;
@@ -20,11 +22,14 @@ import com.dev.hasarelm.wastefooddonation.Common.CommonFunction;
 import com.dev.hasarelm.wastefooddonation.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import static com.dev.hasarelm.wastefooddonation.Common.CommonFunction.CustomTost;
 
 public class RiderHomeActivity extends BaseActivity {
 
     //Ui components
+    private ImageButton mImgLogOut;
     private BottomNavigationView mBtnBottomNavigation;
     private boolean mBackPressedToExitOnce = false;
 
@@ -37,11 +42,13 @@ public class RiderHomeActivity extends BaseActivity {
         initView();
         mBtnBottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        Fragment fragment = new RiderHistoryFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.commit();
+        Fragment fragmeffnt = new RiderHomeFragment();
+        FragmentManager fragmentManahhger = getSupportFragmentManager();
+        FragmentTransaction fragmentTrkkansaction = fragmentManahhger.beginTransaction();
+        fragmentTrkkansaction.replace(R.id.container, fragmeffnt);
+        fragmentTrkkansaction.commit();
+
+
     }
 
 
@@ -50,11 +57,11 @@ public class RiderHomeActivity extends BaseActivity {
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            Fragment fragment = new RiderHistoryFragment();
-                            FragmentManager fragmentManager = getSupportFragmentManager();
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.container, fragment);
-                            fragmentTransaction.commit();
+                            Fragment fragmeffnt = new RiderHomeFragment();
+                            FragmentManager fragmentManahhger = getSupportFragmentManager();
+                            FragmentTransaction fragmentTrkkansaction = fragmentManahhger.beginTransaction();
+                            fragmentTrkkansaction.replace(R.id.container, fragmeffnt);
+                            fragmentTrkkansaction.commit();
                             return true;
 
                         case R.id.navigation_sms:
@@ -65,11 +72,7 @@ public class RiderHomeActivity extends BaseActivity {
                             fragmentTrsaction.commit();
                             return true;
                         case R.id.navigation_notifications:
-                            Fragment fragmeffnt = new RiderHomeFragment();
-                            FragmentManager fragmentManahhger = getSupportFragmentManager();
-                            FragmentTransaction fragmentTrkkansaction = fragmentManahhger.beginTransaction();
-                            fragmentTrkkansaction.replace(R.id.container, fragmeffnt);
-                            fragmentTrkkansaction.commit();
+
                             return true;
                     }
                     return false;

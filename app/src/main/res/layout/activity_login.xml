@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/newkkk"
     android:layout_height="match_parent"
     tools:context=".Activity.LoginActivity">
 
@@ -43,7 +42,7 @@
 
                 <TextView
                     android:text="Username "
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -54,32 +53,19 @@
 
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="3dp"
+            <EditText
+                android:id="@+id/activity_login_et_username"
+                android:hint=" Enter User name"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                app:cardMaxElevation="3dp"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true"
-                app:cardPreventCornerOverlap="true">
-
-                <EditText
-                    android:id="@+id/activity_login_et_username"
-                    android:hint=" Enter User name"
-                    android:text=""
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="3dp"
-                    android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_account"
-                    android:background="@null"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
-            </androidx.cardview.widget.CardView>
+                android:paddingLeft="3dp"
+                android:textSize="12dp"
+                android:drawableLeft="@drawable/ic_baseline_account"
+                android:background="@drawable/card_edge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_marginTop="15dp"
@@ -91,7 +77,7 @@
 
                 <TextView
                     android:text="Password "
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -100,33 +86,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
+            <EditText
+                android:id="@+id/activity_login_et_password"
+                android:hint=" Enter Password"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:background="@drawable/card_edge"
+                android:paddingTop="5dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true"
-                app:cardPreventCornerOverlap="true">
-
-                <EditText
-                    android:id="@+id/activity_login_et_password"
-                    android:hint=" Enter Password"
-                    android:drawableLeft="@drawable/ic_baseline_lock_24"
-                    android:background="@null"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:inputType="textPassword"
-                    android:textSize="12dp"
-                    android:paddingLeft="3dp"
-                    app:passwordToggleEnabled="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </androidx.cardview.widget.CardView>
+                android:paddingBottom="5dp"
+                android:inputType="textPassword"
+                android:textSize="12dp"
+                android:paddingLeft="3dp"
+                app:passwordToggleEnabled="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,17 +117,17 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:shadowColor="@color/col_red"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:checked="true"
-                    android:buttonTint="@color/col_red"
+                    android:buttonTint="@color/colorOvalDashboardBlue"
                     android:layout_height="wrap_content"
                     android:text="Donater" />
                 <RadioButton
                     android:id="@+id/activity_login_rbn_delivery"
                     android:layout_width="0dp"
                     android:shadowColor="@color/col_red"
-                    android:buttonTint="@color/col_red"
-                    android:textColor="@color/white"
+                    android:buttonTint="@color/colorOvalDashboardBlue"
+                    android:textColor="@color/black"
                     android:layout_weight="1"
                     android:checked="false"
                     android:layout_height="wrap_content"
@@ -177,7 +152,7 @@
             <TextView
                 android:id="@+id/activity_login_tv_forgetPassword"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_marginLeft="230dp"
                 android:text="Forget Password ?"
                 android:layout_width="wrap_content"
@@ -196,6 +171,12 @@
                 android:textColor="@color/white"
                 android:elevation="100dp"
                 android:background="@drawable/bg_background_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

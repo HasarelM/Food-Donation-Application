@@ -79,11 +79,7 @@ public class DrawerFragment extends Fragment implements OnItemClickListener<NavD
         mRvDrawerList.setAdapter(mAdapter);
         mRvDrawerList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mTvLoggedUser = view.findViewById(R.id.fragment_navigation_drawer_tv_logged_user);
-        mTvLoggedUserEmail = view.findViewById(R.id.fragment_navigation_drawer_tv_logged_user_email);
 
-        mTvLoggedUser.setText(SharedPref.getString(mActivity, SharedPref.USER_VIEW_NAME_KEY, SharedPref.DEFAULT_VALUE_FOR_STRING));
-        mTvLoggedUserEmail.setText(SharedPref.getString(mActivity, SharedPref.USERNAME_KEY, SharedPref.DEFAULT_VALUE_FOR_STRING));
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {

@@ -16,7 +16,6 @@ public class RiderHistoryFragment extends Fragment {
     View rootView;
 
     public RiderHistoryFragment() {
-
     }
 
 

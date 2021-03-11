@@ -2,10 +2,16 @@ package com.dev.hasarelm.wastefooddonation.Activity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +31,12 @@ import com.dev.hasarelm.wastefooddonation.Activity.Rider.RiderHomeActivity;
 import com.dev.hasarelm.wastefooddonation.Activity.Rider.RiderRegisterActivity;
 import com.dev.hasarelm.wastefooddonation.Common.CommonFunction;
 import com.dev.hasarelm.wastefooddonation.Common.EndPoints;
+import com.dev.hasarelm.wastefooddonation.Common.GPSTracker;
+import com.dev.hasarelm.wastefooddonation.Common.NetworkChangeReceiver;
+import com.dev.hasarelm.wastefooddonation.Common.NetworkUtil;
 import com.dev.hasarelm.wastefooddonation.Common.RetrofitClient;
+import com.dev.hasarelm.wastefooddonation.Common.SharedPref;
+import com.dev.hasarelm.wastefooddonation.Common.SharedPreferencesClass;
 import com.dev.hasarelm.wastefooddonation.Model.LoginUserModel;
 import com.dev.hasarelm.wastefooddonation.Model.RiderRegisterModel;
 import com.dev.hasarelm.wastefooddonation.Model.login;
@@ -44,6 +55,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.net.ConnectivityManager.CONNECTIVITY_ACTION;
 import static com.dev.hasarelm.wastefooddonation.Common.BaseURL.VLF_BASE_URL;
 import static com.dev.hasarelm.wastefooddonation.Common.CommonFunction.CustomTost;
 
@@ -54,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //Ui Components
     private EditText mEtUsername, mEtPassword;
-    private Button mBtnLogin, mBtnRegister;
+    private Button mBtnLogin, mBtnRegister,login;
     private TextView mTvForgetPassword;
     private RadioButton mRbnDonator, mRbnDelivery;
 
@@ -64,6 +76,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
+    public static GPSTracker GPS_;
+    private NetworkChangeReceiver receiver;
+    private IntentFilter intentFilter;
+    public static SharedPreferences localSp;
+    public static double GPS_Longitude = 0.00, GPS_Latitude = 0.00;
+    LocationManager locationManager;
+    private String donater,rider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +90,52 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         initView();
+
+        try {
+
+            localSp = this.getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
+            donater = localSp.getString("deoneter_user_name","");
+            rider = localSp.getString("rider_user_name","");
+
+            if (donater.length()==0){
+
+            }else {
+
+                Intent intent = new Intent(LoginActivity.this,DonaterHomeActivity.class);
+                startActivity(intent);
+            }
+
+            if (rider.length()==0){
+
+            }else {
+
+                Intent intent = new Intent(LoginActivity.this,RiderHomeActivity.class);
+                startActivity(intent);
+            }
+
+        }catch (Exception hh){}
+
+        login = findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  userLogin();
+            }
+        });
+
+        try {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    2000,
+                    1, locationListenerGPS);
+        }catch (Exception ee)
+        {
+
+        }
+
 
         mRbnDonator.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
@@ -83,6 +148,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 mRbnDonator.setChecked(false);
             }
         });
+
+        GPS_ =  new GPSTracker(LoginActivity.this);
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(CONNECTIVITY_ACTION);
+        receiver=new NetworkChangeReceiver();
+
+        try {
+
+            if(GPS_.canGetLocation()==true)
+            {
+                    GPS_Longitude = GPS_.getLongitude();
+                    GPS_Latitude = GPS_.getLatitude();
+                    SharedPref.setLocalSharedPreference(this,"LAST_LOGITUDE",GPS_Longitude+"");
+                    SharedPref.setLocalSharedPreference(this,"LAST_LATITUDE",GPS_Latitude+"");
+
+            }else
+            {
+                CustomTost(this,"Location not found");
+            }
+
+        }catch (Exception h){}
+
     }
 
     private void initView() {
@@ -152,10 +239,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     .show();
 
         }
-
-
-       /* Intent intent = new Intent(LoginActivity.this, DonaterRegisterActivity.class);
-        startActivity(intent);*/
     }
 
     private void forgetPassword() {
@@ -163,7 +246,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
         startActivity(intent);
     }
-
 
     private ArrayList<register> userLoginToApp() {
 
@@ -199,6 +281,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (jsonArray.length() > 0) {
                                 jsonObject = jsonArray.getJSONObject(0);
                             }
+
                             RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
                             EndPoints apiService = RetrofitClient.getLoginClient().create(EndPoints.class);
                             Call<LoginUserModel> call_customer = apiService.loginUser(VLF_BASE_URL + "login", body);
@@ -206,10 +289,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void onResponse(Call<LoginUserModel> call, Response<LoginUserModel> response) {
 
+                                    String address,street,city,mobile;
                                     if (response.code() == 200) {
 
                                         myPd_ring.dismiss();
                                         int type = 0;
+                                        int id = 0;
                                         message = response.body().getMessage();
                                         mLoginUserModel = response.body();
                                         mLogin = response.body().getLogin();
@@ -217,17 +302,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         for (login ls : mLogin) {
 
                                             type = Integer.parseInt(ls.getType());
+                                            id = Integer.parseInt(ls.getId().toString().trim());
+
+                                            try {
+
+                                                String ID = String.valueOf(id);
+                                                address = ls.getAdd_line_1().toString().trim();
+                                                street = ls.getAdd_line_2().toString().trim();
+                                                city = ls.getAdd_line_3().toString().trim();
+                                                mobile = ls.getPhone().toString().trim();
+
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"ID", ID);
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"address", address);
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"street", street);
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"city", city);
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"mobile", mobile);
+
+                                            }catch (Exception ff){}
+
 
                                             if (type == 1) {
 
                                                 CustomTost(LoginActivity.this, "Successfully");
                                                 Intent intent = new Intent(LoginActivity.this, RiderHomeActivity.class);
                                                 startActivity(intent);
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"rider_user_name",mEtUsername.getText().toString().trim()+"");
+
                                             } else if (type == 2) {
 
                                                 CustomTost(LoginActivity.this, "Successfully");
                                                 Intent intent = new Intent(LoginActivity.this, DonaterHomeActivity.class);
                                                 startActivity(intent);
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"deoneter_user_name", mEtUsername.getText().toString().trim()+"");
                                             }
                                         }
                                     }
@@ -243,100 +349,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         } catch (Exception g) {
                         }
-
-                    /*if (mRbnDonator.isChecked()) {
-                        //login api call here
-                        //type 1 = donater
-                        try {
-                            String Json_Body = new Gson().toJson(userLoginToApp());
-                            JSONArray jsonArray = new JSONArray(Json_Body);
-                            JSONObject jsonObject = new JSONObject();
-                            if (jsonArray.length()>0){
-                                jsonObject = jsonArray.getJSONObject(0);
-                            }
-                            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
-                            EndPoints apiService = RetrofitClient.getLoginClient().create(EndPoints.class);
-                            Call<LoginUserModel> call_customer = apiService.loginUser(VLF_BASE_URL + "login", body);
-                            call_customer.enqueue(new Callback<LoginUserModel>() {
-                                @Override
-                                public void onResponse(Call<LoginUserModel> call, Response<LoginUserModel> response) {
-
-                                    if (response.code()==200){
-
-                                        int type =0;
-                                        message = response.body().getMessage();
-                                        mLoginUserModel = response.body();
-                                        mLogin = response.body().getLogin();
-
-                                        for (login ls : mLogin){
-
-                                            type = Integer.parseInt(ls.getType());
-
-                                            if (type==1){
-
-                                                CustomTost(LoginActivity.this, ""+message);
-                                                Intent intent = new Intent(LoginActivity.this, DonaterHomeActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<LoginUserModel> call, Throwable t) {
-
-                                    CustomTost(LoginActivity.this, ""+message);
-                                }
-                            });
-
-                        }catch (Exception g){}
-
-                    } else if (mRbnDelivery.isChecked()) {
-                        //login api call here
-                        //type 2 for rider
-                        try {
-                            String Json_Body = new Gson().toJson(userLoginToApp());
-                            JSONArray jsonArray = new JSONArray(Json_Body);
-                            JSONObject jsonObject = new JSONObject();
-                            if (jsonArray.length()>0){
-                                jsonObject = jsonArray.getJSONObject(0);
-                            }
-                            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
-                            EndPoints apiService = RetrofitClient.getLoginClient().create(EndPoints.class);
-                            Call<LoginUserModel> call_customer = apiService.loginUser(VLF_BASE_URL + "login", body);
-                            call_customer.enqueue(new Callback<LoginUserModel>() {
-                                @Override
-                                public void onResponse(Call<LoginUserModel> call, Response<LoginUserModel> response) {
-
-                                    if (response.code()==200){
-
-                                        int type =0;
-                                        message = response.body().getMessage();
-                                        mLoginUserModel = response.body();
-                                        mLogin = response.body().getLogin();
-
-                                        for (login ls : mLogin){
-
-                                            type = Integer.parseInt(ls.getType());
-
-                                            if (type==2){
-
-                                                CustomTost(LoginActivity.this, ""+message);
-                                                Intent intent = new Intent(LoginActivity.this, RiderHomeActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<LoginUserModel> call, Throwable t) {
-
-                                    CustomTost(LoginActivity.this, ""+message);
-                                }
-                            });
-
-                        }catch (Exception g){}*/
 
 
                     } else {
@@ -459,4 +471,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
+    LocationListener locationListenerGPS=new LocationListener() {
+        @Override
+        public void onLocationChanged(android.location.Location location) {
+            double latitude=location.getLatitude();
+            double longitude=location.getLongitude();
+            /*GPS_Longitude = longitude;
+            GPS_Latitude = latitude;*/
+
+
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            try {
+
+            }catch (NullPointerException ee)
+            {
+
+            }
+
+
+        }
+    };
 }

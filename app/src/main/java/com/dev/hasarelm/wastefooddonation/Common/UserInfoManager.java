@@ -7,7 +7,6 @@ public class UserInfoManager {
     public static void logout(Activity act) {
         try {
             String existingAccountNumber = SharedPref.getString(act, SharedPref.ACCOUNT_NUMBER_KEY, SharedPref.DEFAULT_VALUE_FOR_STRING);
-            SharedPref.getPref(act).edit().clear().commit();
             SharedPref.saveString(act, SharedPref.ACCOUNT_NUMBER_KEY, existingAccountNumber);
         } catch (Exception e) {
         }
