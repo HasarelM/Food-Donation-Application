@@ -125,6 +125,7 @@ public class BaseActivity extends AppCompatActivity implements DrawerFragment.Fr
                             public void onClick(SweetAlertDialog sDialog) {
                                 sDialog.dismissWithAnimation();
                                 SharedPreferencesClass.ClearSharedPreference(BaseActivity.this,"deoneter_user_name");
+                                SharedPreferencesClass.ClearSharedPreference(BaseActivity.this,"USER_ID");
                                 UserInfoManager.logout(innerActivity);
                                 startActivity(new Intent(getApplicationContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             }

@@ -1,6 +1,8 @@
 package com.dev.hasarelm.wastefooddonation.Fragment;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.dev.hasarelm.wastefooddonation.Activity.Donater.DonationHistoryActivi
 import com.dev.hasarelm.wastefooddonation.Adapter.NavigationDrawerAdapter;
 import com.dev.hasarelm.wastefooddonation.Common.CommonFunction;
 import com.dev.hasarelm.wastefooddonation.Common.SharedPref;
+import com.dev.hasarelm.wastefooddonation.Common.SharedPreferencesClass;
 import com.dev.hasarelm.wastefooddonation.Interface.OnItemClickListener;
 import com.dev.hasarelm.wastefooddonation.Model.NavDrawerItem;
 import com.dev.hasarelm.wastefooddonation.R;
@@ -49,6 +52,12 @@ public class DrawerFragment extends Fragment implements OnItemClickListener<NavD
     private View mContainerView;
     private NavigationDrawerAdapter mAdapter;
     private FragmentDrawerListener mDrawerListener;
+
+    public static SharedPreferences localSP;
+    private String userID = "";
+    private int id ;
+    private int mClickID;
+    private String message;
 
     public DrawerFragment() {
     }
@@ -79,6 +88,17 @@ public class DrawerFragment extends Fragment implements OnItemClickListener<NavD
         mRvDrawerList.setAdapter(mAdapter);
         mRvDrawerList.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        try {
+
+            localSP = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);
+            userID = localSP.getString("D_LOGIN_USER_NAME", "");
+            id = Integer.parseInt(userID);
+
+            mTvLoggedUser = view.findViewById(R.id.fragment_navigationdrawer_tv_logged_user);
+            mTvLoggedUser.setText(userID+"");
+
+        } catch (Exception g) {
+        }
 
     }
 

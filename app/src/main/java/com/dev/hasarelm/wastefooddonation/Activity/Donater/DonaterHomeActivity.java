@@ -32,6 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.dev.hasarelm.wastefooddonation.Activity.LoginActivity.loginID;
 import static com.dev.hasarelm.wastefooddonation.Common.BaseURL.VLF_BASE_URL;
 
 public class DonaterHomeActivity extends BaseActivity implements View.OnClickListener, OnDonationItemClickListner<donations> {
@@ -41,13 +42,13 @@ public class DonaterHomeActivity extends BaseActivity implements View.OnClickLis
     private RecyclerView mRvAllDonationList;
     private LinearLayout mLvPending, mLvApprove, mLvDelivery;
 
-    public static SharedPreferences localSP;
+    SharedPreferences localSP;
     private DonationRequestListModel mDonationTypeModel;
     private ArrayList<donations> mDonationTypes;
     private DonaterRequestAdapter mDonaterRequestAdapter;
     private String ID = "";
     private int userID = 0;
-    private int state;
+    private int state=1;
     private String rider_user_name;
     String category, weight, address ,street, city, monile, date,vehicle;
 
@@ -62,14 +63,17 @@ public class DonaterHomeActivity extends BaseActivity implements View.OnClickLis
 
         try {
 
+            loginID = userID;
+
             localSP = this.getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);
-            ID = localSP.getString("ID", "");
+            ID = localSP.getString("USER_ID", "");
             userID = Integer.parseInt(ID);
 
         } catch (Exception f) {
         }
 
-        getAllDonations(state);
+
+        getAllDonations(0,userID);
     }
 
     private void setupRecyclerView(ArrayList<donations> donationsArrayList) {
@@ -79,11 +83,11 @@ public class DonaterHomeActivity extends BaseActivity implements View.OnClickLis
         mRvAllDonationList.setAdapter(mDonaterRequestAdapter);
     }
 
-    private void getAllDonations(int state) {
+    private void getAllDonations(int state, int userID) {
         final ProgressDialog myPd_ring = ProgressDialog.show(this, "Please wait", "", true);
         try {
             EndPoints apiService = RetrofitClient.getLoginClient().create(EndPoints.class);
-            Call<DonationRequestListModel> call_customer = apiService.getAllDonationList(VLF_BASE_URL + "donations?", userID, state);
+            Call<DonationRequestListModel> call_customer = apiService.getAllDonationList(VLF_BASE_URL + "donations?donater_id=", userID, state);
             call_customer.enqueue(new Callback<DonationRequestListModel>() {
                 @Override
                 public void onResponse(Call<DonationRequestListModel> call, Response<DonationRequestListModel> response) {
@@ -92,7 +96,7 @@ public class DonaterHomeActivity extends BaseActivity implements View.OnClickLis
 
                         mDonationTypeModel = response.body();
                         mDonationTypes = mDonationTypeModel.getDonations();
-
+                        myPd_ring.dismiss();
                         if (mDonationTypes.size() > 0) {
 
                             setupRecyclerView(mDonationTypes);
@@ -139,13 +143,13 @@ public class DonaterHomeActivity extends BaseActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.activity_donater_home_lv_pending:
-                getAllDonations(1);
+                getAllDonations(1,userID);
                 break;
             case R.id.activity_donater_home_lv_approve:
-                getAllDonations(2);
+                getAllDonations(2,userID);
                 break;
             case R.id.activity_donater_home_lv_delivery:
-                getAllDonations(3);
+                getAllDonations(3,userID);
                 break;
             default:
                 break;

@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import com.dev.hasarelm.wastefooddonation.Activity.Donater.DonaterHomeActivity;
 import com.dev.hasarelm.wastefooddonation.Activity.Donater.DonaterRegisterActivity;
 import com.dev.hasarelm.wastefooddonation.Activity.Rider.RiderHomeActivity;
+import com.dev.hasarelm.wastefooddonation.Activity.Rider.RiderNotificationFragment;
 import com.dev.hasarelm.wastefooddonation.Activity.Rider.RiderRegisterActivity;
 import com.dev.hasarelm.wastefooddonation.Common.CommonFunction;
 import com.dev.hasarelm.wastefooddonation.Common.EndPoints;
@@ -83,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static double GPS_Longitude = 0.00, GPS_Latitude = 0.00;
     LocationManager locationManager;
     private String donater,rider;
+    public static int loginID=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -292,6 +294,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     String address,street,city,mobile;
                                     if (response.code() == 200) {
 
+                                        String ID="";
+
                                         myPd_ring.dismiss();
                                         int type = 0;
                                         int id = 0;
@@ -302,17 +306,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         for (login ls : mLogin) {
 
                                             type = Integer.parseInt(ls.getType());
-                                            id = Integer.parseInt(ls.getId().toString().trim());
+                                            id = Integer.parseInt(ls.getId());
 
                                             try {
 
-                                                String ID = String.valueOf(id);
+                                                loginID = id;
+                                                ID = String.valueOf(id);
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"USER_ID", ID);
+
                                                 address = ls.getAdd_line_1().toString().trim();
                                                 street = ls.getAdd_line_2().toString().trim();
                                                 city = ls.getAdd_line_3().toString().trim();
                                                 mobile = ls.getPhone().toString().trim();
 
-                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"ID", ID);
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"USER_ID", ID);
                                                 SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"address", address);
                                                 SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"street", street);
                                                 SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"city", city);
@@ -325,6 +332,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                                 CustomTost(LoginActivity.this, "Successfully");
                                                 Intent intent = new Intent(LoginActivity.this, RiderHomeActivity.class);
+                                                intent.putExtra("EXTRA_SESSION_ID", ID);
                                                 startActivity(intent);
                                                 SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"rider_user_name",mEtUsername.getText().toString().trim()+"");
 
@@ -385,7 +393,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             result = 0;
         }
         return result;
-
     }
 
     private void checkPermission() {

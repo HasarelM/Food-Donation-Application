@@ -47,8 +47,6 @@ public class RiderHomeActivity extends BaseActivity {
         FragmentTransaction fragmentTrkkansaction = fragmentManahhger.beginTransaction();
         fragmentTrkkansaction.replace(R.id.container, fragmeffnt);
         fragmentTrkkansaction.commit();
-
-
     }
 
 
@@ -65,14 +63,27 @@ public class RiderHomeActivity extends BaseActivity {
                             return true;
 
                         case R.id.navigation_sms:
+                            Fragment framddent = new RiderHistoryFragment();
+                            FragmentManager fragmensstManageer = getSupportFragmentManager();
+                            FragmentTransaction fragmenggtTrsaction = fragmensstManageer.beginTransaction();
+                            fragmenggtTrsaction.replace(R.id.container, framddent);
+                            fragmenggtTrsaction.commit();
+                            return true;
+
+                        case R.id.navigation_notifications:
                             Fragment frament = new RiderNotificationFragment();
                             FragmentManager fragmentManageer = getSupportFragmentManager();
                             FragmentTransaction fragmentTrsaction = fragmentManageer.beginTransaction();
                             fragmentTrsaction.replace(R.id.container, frament);
                             fragmentTrsaction.commit();
                             return true;
-                        case R.id.navigation_notifications:
 
+                        case R.id.navigation_history:
+                            Fragment framssent = new RiderOrderHistory();
+                            FragmentManager fragmentMddanageer = getSupportFragmentManager();
+                            FragmentTransaction fragmentTrsaddction = fragmentMddanageer.beginTransaction();
+                            fragmentTrsaddction.replace(R.id.container, framssent);
+                            fragmentTrsaddction.commit();
                             return true;
                     }
                     return false;

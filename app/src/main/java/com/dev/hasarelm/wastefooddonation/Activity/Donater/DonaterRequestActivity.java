@@ -94,7 +94,7 @@ public class DonaterRequestActivity extends BaseActivity implements View.OnClick
         getVehicleAllTypes();
 
         localSP = this.getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
-        ID = localSP.getString("ID","");
+        ID = localSP.getString("USER_ID","");
         address = localSP.getString("address","");
         street = localSP.getString("street","");
         city = localSP.getString("city","");
@@ -280,7 +280,6 @@ public class DonaterRequestActivity extends BaseActivity implements View.OnClick
                         mDonationRequestModel = response.body();
                         mDonationCreates = mDonationRequestModel.getDonationCreate();
                         message = mDonationRequestModel.getMessage();
-                        Toast.makeText(DonaterRequestActivity.this, ""+message, Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(DonaterRequestActivity.this,DonaterHomeActivity.class);
                         startActivity(intent);

@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,13 +37,20 @@ import com.dev.hasarelm.wastefooddonation.Interface.OnDonationItemClickListner;
 import com.dev.hasarelm.wastefooddonation.Interface.OnMoreInfoClickListner;
 import com.dev.hasarelm.wastefooddonation.Interface.OnRiderCallClickLisner;
 import com.dev.hasarelm.wastefooddonation.Model.DonationRequestListModel;
+import com.dev.hasarelm.wastefooddonation.Model.DonationUpdetes;
+import com.dev.hasarelm.wastefooddonation.Model.donationUpdate;
 import com.dev.hasarelm.wastefooddonation.Model.donations;
 import com.dev.hasarelm.wastefooddonation.R;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,15 +70,21 @@ public class RiderHomeFragment extends Fragment implements View.OnClickListener,
     private Activity activity;
 
     private int ID = 0;
+    private int state = 1;
     private DonationRequestListModel mDonationRequestListModel;
     private ArrayList<donations> mDonationsArrayList;
     private RiderRequestAdapter mRiderRequestAdapter;
+    private ArrayList<donationUpdate>mDonationUpdates;
+    private DonationUpdetes mDonationUpdetes;
 
     private String longitude;
     private String latitude;
     private String fName, lName, address, city, street, weight, creation_date, donation_type, phoneCall;
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
+    public static SharedPreferences localSP;
+    private String DriverID = "";
+    private int userID=0;
 
     public RiderHomeFragment() {
     }
@@ -96,6 +110,12 @@ public class RiderHomeFragment extends Fragment implements View.OnClickListener,
         mTvCar.setOnClickListener(this);
         mTvVan.setOnClickListener(this);
         mTvTruck.setOnClickListener(this);
+
+        try {
+            localSP = getActivity().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
+            DriverID = localSP.getString("USER_ID","");
+            userID = Integer.parseInt(DriverID);
+        }catch (Exception f){}
 
 
         mImgLogOut = rootView.findViewById(R.id.activity_rider_home_btn_logout);
@@ -128,8 +148,8 @@ public class RiderHomeFragment extends Fragment implements View.OnClickListener,
             }
         });
 
-        addNotification();
-        getDonationRequestList(ID);
+       // addNotification();
+        getDonationRequestList(ID,state);
 
         return rootView;
     }
@@ -164,13 +184,13 @@ public class RiderHomeFragment extends Fragment implements View.OnClickListener,
         mRvDonationList.setAdapter(mRiderRequestAdapter);
     }
 
-    private void getDonationRequestList(int id) {
+    private void getDonationRequestList(int id, int state) {
 
         final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
         try {
 
             EndPoints endPoints = RetrofitClient.getLoginClient().create(EndPoints.class);
-            Call<DonationRequestListModel> call = endPoints.getAllDonationRequest(VLF_BASE_URL + "donations?", id);
+            Call<DonationRequestListModel> call = endPoints.getAllDonationRequest(VLF_BASE_URL + "donations?", id,state);
             call.enqueue(new Callback<DonationRequestListModel>() {
                 @Override
                 public void onResponse(Call<DonationRequestListModel> call, Response<DonationRequestListModel> response) {
@@ -203,20 +223,19 @@ public class RiderHomeFragment extends Fragment implements View.OnClickListener,
 
         switch (v.getId()) {
             case R.id.rider_home_fragment_bike:
-
-                getDonationRequestList(1);
+                getDonationRequestList(1,state);
                 break;
             case R.id.rider_home_fragment_car:
-                getDonationRequestList(2);
+                getDonationRequestList(2,state);
                 break;
             case R.id.rider_home_fragment_threewell:
-                getDonationRequestList(3);
+                getDonationRequestList(3,state);
                 break;
             case R.id.rider_home_fragment_truck:
-                getDonationRequestList(5);
+                getDonationRequestList(5,state);
                 break;
             case R.id.rider_home_fragment_van:
-                getDonationRequestList(4);
+                getDonationRequestList(4,state);
                 break;
             default:
                 break;
@@ -229,7 +248,13 @@ public class RiderHomeFragment extends Fragment implements View.OnClickListener,
         double lng = GPS_Longitude;
         double lat = GPS_Latitude;
 
+        int clickID = data.getId();
+        int driver_id = data.getDriver_id();
+        String type = "pick";
+
         try {
+
+            updateOrderStatus(clickID,userID,type);
 
             longitude = data.getLongitude() + "";
             latitude = data.getLatitude() + "";
@@ -243,6 +268,34 @@ public class RiderHomeFragment extends Fragment implements View.OnClickListener,
         }
 
     }
+
+    private void updateOrderStatus(int clickID, int driver_id, String type) {
+
+        try {
+
+            EndPoints endPoints = RetrofitClient.getLoginClient().create(EndPoints.class);
+            Call<DonationUpdetes>call = endPoints.updateOrder(VLF_BASE_URL+"donation/pickdrop",clickID,driver_id,type);
+            call.enqueue(new Callback<DonationUpdetes>() {
+                @Override
+                public void onResponse(Call<DonationUpdetes> call, Response<DonationUpdetes> response) {
+
+                    if (response.code()==200){
+
+                        mDonationUpdetes = response.body();
+                        mDonationUpdates = mDonationUpdetes.getDonationUpdate();
+                        String message = mDonationUpdetes.getMessage();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DonationUpdetes> call, Throwable t) {
+
+                }
+            });
+
+        }catch (Exception f){}
+    }
+
 
     @Override
     public void onCallClick(int position, donations data) {

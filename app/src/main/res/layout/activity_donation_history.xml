@@ -17,11 +17,17 @@
             layout="@layout/toolbar" />
 
 
-        <TextView
-            android:text="Donation history"
-            android:gravity="center"
+        <LinearLayout
+            android:layout_below="@id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_donater_home_rv_donation_list_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

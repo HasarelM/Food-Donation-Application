@@ -1,5 +1,7 @@
 package com.dev.hasarelm.wastefooddonation.Model;
 
+import java.util.ArrayList;
+
 public class donations {
 
     private int state;
@@ -15,6 +17,26 @@ public class donations {
     private double longitude;
     private int id;
     private String donator_first_name;
+
+    public ArrayList<com.dev.hasarelm.wastefooddonation.Model.images> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<com.dev.hasarelm.wastefooddonation.Model.images> images) {
+        this.images = images;
+    }
+
+    private ArrayList<images>images;
+
+    public int getDriver_id() {
+        return driver_id;
+    }
+
+    public void setDriver_id(int driver_id) {
+        this.driver_id = driver_id;
+    }
+
+    private int driver_id;
 
     public String getDonator_first_name() {
         return donator_first_name;

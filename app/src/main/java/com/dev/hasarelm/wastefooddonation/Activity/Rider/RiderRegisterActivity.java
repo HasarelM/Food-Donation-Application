@@ -141,8 +141,7 @@ public class RiderRegisterActivity extends BaseActivity implements View.OnClickL
 
                         mSelectVehicleType.add(0,"Select Vehicle type");
                         ArrayAdapter<String> dataAdapter_type =
-                                new ArrayAdapter<String>(RiderRegisterActivity.this
-                                        , android.R.layout.simple_spinner_item, mSelectVehicleType);
+                                new ArrayAdapter<String>(RiderRegisterActivity.this, android.R.layout.simple_spinner_item, mSelectVehicleType);
                         dataAdapter_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         mSpVehicleType.setAdapter(dataAdapter_type);
                     }
@@ -267,6 +266,7 @@ public class RiderRegisterActivity extends BaseActivity implements View.OnClickL
                             userName = rs.getEmail().toString().trim();
                             ID = rs.getId().toString().trim();
                         }
+
                         SharedPref.setLocalSharedPreference(RiderRegisterActivity.this,"R_LOGIN_USER_NAME",userName);
                         SharedPref.setLocalSharedPreference(RiderRegisterActivity.this,"R_LOGIN_USER_ID",ID);
 

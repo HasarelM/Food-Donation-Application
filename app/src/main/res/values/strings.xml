@@ -50,6 +50,7 @@
     <string name="forget_password_activity_title">Forget Password</string>
     <string name="register_activity_title">Register Here</string>
     <string name="donater_request_activity_title">Create Donation Here</string>
+    <string name="register_activity_order">Complete donation</string>
 
 
     <!--Rider-->

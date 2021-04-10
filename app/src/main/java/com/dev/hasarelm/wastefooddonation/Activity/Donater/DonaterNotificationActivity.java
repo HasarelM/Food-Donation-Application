@@ -64,10 +64,10 @@ public class DonaterNotificationActivity extends BaseActivity implements OnItemC
         initView();
 
         localSP = this.getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
-        ID = localSP.getString("ID","");
+        ID = localSP.getString("USER_ID","");
         userID = Integer.parseInt(ID);
 
-        getAllNotifications();
+        getAllNotifications(userID);
 
     }
 
@@ -97,7 +97,7 @@ public class DonaterNotificationActivity extends BaseActivity implements OnItemC
 
     }
 
-    private void getAllNotifications() {
+    private void getAllNotifications(int userID) {
 
         final ProgressDialog myPd_ring = ProgressDialog.show(this, "Please wait", "", true);
         try {
@@ -109,13 +109,15 @@ public class DonaterNotificationActivity extends BaseActivity implements OnItemC
 
                     if (response.code()==200){
 
+                        myPd_ring.dismiss();
+
                         mNotificationModel = response.body();
                         mNotificationsArrayList = mNotificationModel.getNotifications();
 
                         if (mNotificationsArrayList.size()>0){
 
                            setupRecyclerView(mNotificationsArrayList);
-                            myPd_ring.dismiss();
+                          //  myPd_ring.dismiss();
                         }
                     }
                 }

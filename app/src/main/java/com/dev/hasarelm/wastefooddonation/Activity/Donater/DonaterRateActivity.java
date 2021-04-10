@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -30,6 +33,7 @@ public class DonaterRateActivity extends BaseActivity {
     //Ui components
     private TextView mTvUserName,mTvDonateLevel,mTvDescription;
     private RatingBar mRatingBar;
+    private Button mBtnBack;
 
     private UserDetails mUserDetails;
     private ArrayList<profile>mProfile;
@@ -47,15 +51,23 @@ public class DonaterRateActivity extends BaseActivity {
         setDrawer();
         initView();
 
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(DonaterRateActivity.this,DonaterHomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         localSP = this.getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
-        ID = localSP.getString("ID","");
+        ID = localSP.getString("USER_ID","");
         userID = Integer.parseInt(ID);
 
-        getDonaterLevel();
+        getDonaterLevel(userID);
     }
 
-    private void getDonaterLevel() {
+    private void getDonaterLevel(int userID) {
 
         final ProgressDialog myPd_ring = ProgressDialog.show(this, "Please wait", "", true);
         EndPoints endPoints = RetrofitClient.getLoginClient().create(EndPoints.class);
@@ -68,6 +80,7 @@ public class DonaterRateActivity extends BaseActivity {
 
                     if (response.code()==200){
 
+                        myPd_ring.dismiss();
                         mUserDetails = response.body();
                         mProfile = mUserDetails.getProfile();
 
@@ -75,12 +88,24 @@ public class DonaterRateActivity extends BaseActivity {
 
                             mTvUserName.setText("Mr."+pf.getName());
 
-                            if (pf.getRate()==1){
+                            if (pf.getRate()==0){
+
+                                mTvDonateLevel.setText("Level 1 Donater");
+                                mRatingBar.setRating(Float.parseFloat("1.0"));
+                                mTvDescription.setText("In this tutorial, we shows you two basic examples to send SMS message. ... 1, You will use Android Studio IDE to create an Android application and name it as");
+                               // myPd_ring.dismiss();
+                            }else  if (pf.getRate()==1){
+
+                                mTvDonateLevel.setText("Level 2 Donater");
+                                mRatingBar.setRating(Float.parseFloat("2.0"));
+                                mTvDescription.setText("In this tutorial, we shows you two basic examples to send SMS message. ... 1, You will use Android Studio IDE to create an Android application and name it as");
+                                // myPd_ring.dismiss();
+                            }else  if (pf.getRate()==3){
 
                                 mTvDonateLevel.setText("Level 3 Donater");
                                 mRatingBar.setRating(Float.parseFloat("3.0"));
                                 mTvDescription.setText("In this tutorial, we shows you two basic examples to send SMS message. ... 1, You will use Android Studio IDE to create an Android application and name it as");
-                                myPd_ring.dismiss();
+                                // myPd_ring.dismiss();
                             }
                         }
                     }
@@ -91,7 +116,7 @@ public class DonaterRateActivity extends BaseActivity {
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
 
-                myPd_ring.dismiss();
+               // myPd_ring.dismiss();
             }
         });
     }
@@ -102,5 +127,7 @@ public class DonaterRateActivity extends BaseActivity {
         mTvDonateLevel = findViewById(R.id.activity_donater_tv_level);
         mTvDescription = findViewById(R.id.activity_donater_tv_description);
         mRatingBar = findViewById(R.id.ratingBar);
+        mBtnBack = findViewById(R.id.btn_back_notification);
+
     }
 }

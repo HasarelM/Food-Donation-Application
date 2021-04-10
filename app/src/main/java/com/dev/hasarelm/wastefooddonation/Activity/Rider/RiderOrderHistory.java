@@ -1,26 +1,26 @@
-package com.dev.hasarelm.wastefooddonation.Activity.Donater;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.dev.hasarelm.wastefooddonation.Activity.Rider;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dev.hasarelm.wastefooddonation.Adapter.DonaterRequestAdapter;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.dev.hasarelm.wastefooddonation.Adapter.DonationHistoryAdapter;
-import com.dev.hasarelm.wastefooddonation.Common.BaseActivity;
 import com.dev.hasarelm.wastefooddonation.Common.EndPoints;
 import com.dev.hasarelm.wastefooddonation.Common.RetrofitClient;
 import com.dev.hasarelm.wastefooddonation.Common.SharedPreferencesClass;
-import com.dev.hasarelm.wastefooddonation.Interface.OnDonationItemClickListner;
 import com.dev.hasarelm.wastefooddonation.Interface.OnHistoryClickListner;
 import com.dev.hasarelm.wastefooddonation.Model.DonationRequestListModel;
 import com.dev.hasarelm.wastefooddonation.Model.donations;
@@ -28,58 +28,60 @@ import com.dev.hasarelm.wastefooddonation.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.dev.hasarelm.wastefooddonation.Activity.LoginActivity.loginID;
 import static com.dev.hasarelm.wastefooddonation.Common.BaseURL.VLF_BASE_URL;
 
-public class DonationHistoryActivity extends BaseActivity implements OnHistoryClickListner<donations> {
+public class RiderOrderHistory extends Fragment implements OnHistoryClickListner<donations> {
 
     private RecyclerView mRecyclerView;
     private String ID = "";
     private int userID = 0;
-    private int state=3;
+    private int state;
     SharedPreferences localSP;
     private DonationHistoryAdapter mDonationHistoryAdapter;
     private DonationRequestListModel mDonationTypeModel;
     private ArrayList<donations> mDonationTypes;
-    private DonaterRequestAdapter mDonaterRequestAdapter;
     private Dialog add_dialog;
 
+    View rootView;
+
+    public RiderOrderHistory() {
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donation_history);
+    }
 
-        setToolbar(getResources().getString(R.string.Donation_activity_title), DonationHistoryActivity.this);
-        setDrawer();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mRecyclerView = findViewById(R.id.activity_donater_home_rv_donation_list_history);
+        rootView = inflater.inflate(R.layout.rider_order_history, container, false);
+        mRecyclerView = rootView.findViewById(R.id.activity_donater_home_rv_donation_list_history);
 
         try {
-
-            loginID = userID;
-
-            localSP = this.getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);
+            localSP = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);
             ID = localSP.getString("USER_ID", "");
             userID = Integer.parseInt(ID);
 
         } catch (Exception f) {
         }
 
-        getHistoryList(userID,state);
+        getHistoryList(userID, 3);
+
+        return rootView;
     }
 
-    private void getHistoryList(int userID,int state) {
-        final ProgressDialog myPd_ring = ProgressDialog.show(this, "Please wait", "", true);
+    private void getHistoryList(int userID, int state) {
+        final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
 
         try {
             EndPoints apiService = RetrofitClient.getLoginClient().create(EndPoints.class);
-            Call<DonationRequestListModel> call_customer = apiService.getAllDonationList(VLF_BASE_URL + "donations?donater_id=", userID, state);
+            Call<DonationRequestListModel> call_customer = apiService.getAllCompleteOrderList(VLF_BASE_URL + "donations?driver_id=", userID, state);
             call_customer.enqueue(new Callback<DonationRequestListModel>() {
                 @Override
                 public void onResponse(Call<DonationRequestListModel> call, Response<DonationRequestListModel> response) {
@@ -103,14 +105,14 @@ public class DonationHistoryActivity extends BaseActivity implements OnHistoryCl
                 }
             });
 
-        }catch (Exception f){}
+        } catch (Exception f) {
+        }
     }
 
-
     private void setupRecyclerView(ArrayList<donations> donationsArrayList) {
-        mDonationHistoryAdapter = new DonationHistoryAdapter(donationsArrayList,DonationHistoryActivity.this , this);
+        mDonationHistoryAdapter = new DonationHistoryAdapter(donationsArrayList, getActivity(), this);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(DonationHistoryActivity.this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mDonationHistoryAdapter);
     }
 
@@ -119,7 +121,7 @@ public class DonationHistoryActivity extends BaseActivity implements OnHistoryCl
 
         int Id = data.getId();
 
-        add_dialog = new Dialog(this);
+        add_dialog = new Dialog(getContext());
         add_dialog.setContentView(R.layout.view_history);
         add_dialog.setTitle("Title");
 
@@ -132,14 +134,6 @@ public class DonationHistoryActivity extends BaseActivity implements OnHistoryCl
             TextView create_date = add_dialog.findViewById(R.id.add_seller_view_description_create_date_donate);
             Button close = add_dialog.findViewById(R.id.add_view_seller_btn_close_close);
 
-            StringTokenizer tokens = new StringTokenizer(data.getCreated_at(), "T");
-            String first = tokens.nextToken();
-            String second = tokens.nextToken();
-            StringTokenizer token = new StringTokenizer(second, "T");
-            String third = token.nextToken();
-            StringTokenizer toke = new StringTokenizer(third, ".");
-            String val = toke.nextToken();
-
             String imagename = data.getImages().get(0).getImage_url_2();
 
             try {
@@ -147,15 +141,14 @@ public class DonationHistoryActivity extends BaseActivity implements OnHistoryCl
                         .error(R.drawable.ic_launcher_background)
                         .into(imageView);
 
-            }catch (Exception ww)
-            {
+            } catch (Exception ww) {
             }
 
-            donate_name.setText(data.getDonator_first_name()+"");
-            donate_mobile.setText(data.getPhone()+"");
-            category.setText(data.getDonation_type()+"");
-            weight.setText(data.getWeight()+"");
-            create_date.setText(first+"");
+            donate_name.setText(data.getDonator_first_name() + "");
+            donate_mobile.setText(data.getPhone() + "");
+            category.setText(data.getDonation_type() + "");
+            weight.setText(data.getWeight() + "");
+            create_date.setText(data.getCreated_at() + "");
 
             close.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -166,6 +159,10 @@ public class DonationHistoryActivity extends BaseActivity implements OnHistoryCl
 
             add_dialog.show();
 
-        }catch (Exception h){}
+        } catch (Exception h) {
+        }
+
     }
+
+
 }

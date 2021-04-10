@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Rider.RiderCompleteOrderActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+
+            <TextView
+                android:id="@+id/txt_back_arrow_dont"
+                android:layout_width="90dp"
+                android:layout_height="50dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Order Status "
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/activity_order_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/card_edge"
+                    android:textSize="12dp"
+                    android:drawableLeft="@drawable/ic_baseline_local_shipping_24"
+                    android:text=" Complete"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp" />
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Complete Date "
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/activity_complete_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:background="@drawable/card_edge"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    android:drawableLeft="@drawable/ic_baseline_event_24"
+                    android:hint=" Enter complete date"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp" />
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Complete time "
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <EditText
+                    android:id="@+id/activity_register_et_completetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/card_edge"
+                    android:drawableLeft="@drawable/ic_baseline_av_timer_24"
+                    android:hint=" Enter complete time"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp" />
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Image upload "
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text=" * "
+                        android:textColor="@color/col_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/parent_linear_layout"
+                        android:layout_width="155dp"
+                        android:layout_height="155dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="155dp"
+                            android:layout_height="155dp"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:id="@+id/iv_add_image"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:scaleType="center"
+                                android:src="@android:drawable/ic_input_add"
+                                android:background="@android:color/background_light" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <Button
+                    android:id="@+id/activity_register_upload_register"
+                    android:textSize="15dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="60dp"
+                    android:layout_marginLeft="60dp"
+                    android:textAllCaps="false"
+                    android:text="Upload"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="30dp"
+                    android:textColor="@color/white"
+                    android:elevation="100dp"
+                    android:background="@drawable/bg_background_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

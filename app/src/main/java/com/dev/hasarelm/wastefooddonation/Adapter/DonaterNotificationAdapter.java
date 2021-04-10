@@ -39,16 +39,19 @@ public class DonaterNotificationAdapter extends RecyclerView.Adapter<DonaterNoti
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        notifications nfy = mNotificationsArrayList.get(position);
-        holder.mTvNotificationHeader.setText(nfy.getTitle());
-        holder.mTvNotificationBody.setText(nfy.getDescription());
+        try {
+            notifications nfy = mNotificationsArrayList.get(position);
+            holder.mTvNotificationHeader.setText(nfy.getTitle());
+            holder.mTvNotificationBody.setText(nfy.getDescription());
 
-        if (nfy.getIs_read()==1){
+            if (nfy.getIs_read()==1){
 
-        }else {
+            }else {
 
-            holder.mTvNotificationIcon.setBackground(activity.getResources().getDrawable(R.drawable.ic_baseline_notifications_active_24));
-        }
+                holder.mTvNotificationIcon.setBackground(activity.getResources().getDrawable(R.drawable.ic_baseline_notifications_active_24));
+            }
+        }catch (Exception d){}
+
     }
 
     @Override
