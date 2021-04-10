@@ -48,14 +48,12 @@ public class RiderNotificationFragment extends Fragment implements OnItemClickLi
     View rootView;
 
     public RiderNotificationFragment() {
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +66,7 @@ public class RiderNotificationFragment extends Fragment implements OnItemClickLi
             ID = localSP.getString("USER_ID","");
             userID = Integer.parseInt(ID);
         }catch (Exception f){}
+
 
         getAllNotifications();
 
