@@ -72,7 +72,6 @@ public class DonaterHomeActivity extends BaseActivity implements View.OnClickLis
         } catch (Exception f) {
         }
 
-
         getAllDonations(0,userID);
     }
 

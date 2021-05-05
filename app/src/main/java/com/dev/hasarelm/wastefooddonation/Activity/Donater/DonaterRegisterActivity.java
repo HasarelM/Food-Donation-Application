@@ -207,7 +207,7 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
                         String ID = "";
                         if (response.code() == 200) {
                             myPd_ring.dismiss();
-                            Toast.makeText(DonaterRegisterActivity.this, "doneter "+message,Toast.LENGTH_LONG).show();
+                            Toast.makeText(DonaterRegisterActivity.this, "Doneter Registered ",Toast.LENGTH_LONG).show();
                             message = response.body().getMessage();
                             mDonaterRegisterModel = response.body();
                             mRegister = mDonaterRegisterModel.getRegister();
@@ -229,7 +229,7 @@ public class DonaterRegisterActivity extends BaseActivity implements View.OnClic
                     @Override
                     public void onFailure(Call<DonaterRegisterModel> call, Throwable t) {
                         myPd_ring.dismiss();
-                        Toast.makeText(DonaterRegisterActivity.this, ""+message,Toast.LENGTH_LONG).show();
+                        Toast.makeText(DonaterRegisterActivity.this, "Doneter Registered",Toast.LENGTH_LONG).show();
                     }
                 });
 

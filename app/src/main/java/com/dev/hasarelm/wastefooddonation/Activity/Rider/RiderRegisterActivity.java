@@ -256,7 +256,7 @@ public class RiderRegisterActivity extends BaseActivity implements View.OnClickL
 
                     if (response.code() == 200) {
                         myPd_ring.dismiss();
-                        Toast.makeText(RiderRegisterActivity.this, "Rider "+message,Toast.LENGTH_LONG).show();
+                        Toast.makeText(RiderRegisterActivity.this, "Rider Registered ",Toast.LENGTH_LONG).show();
                         message = response.body().getMessage();
                         mRegisterModel = response.body();
                         mRegister = response.body().getRegister();
@@ -278,7 +278,7 @@ public class RiderRegisterActivity extends BaseActivity implements View.OnClickL
                 @Override
                 public void onFailure(Call<RiderRegisterModel> call, Throwable t) {
                     myPd_ring.dismiss();
-                    Toast.makeText(RiderRegisterActivity.this, ""+message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(RiderRegisterActivity.this, "Rider Registered",Toast.LENGTH_LONG).show();
                 }
             });
 
